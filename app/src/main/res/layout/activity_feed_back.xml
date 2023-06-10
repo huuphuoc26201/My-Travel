@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#B9A6A3A3"
+    tools:context=".Evaluate">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:background="#30B1A7A7"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="87dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:background="#FAF3F3"
+            app:srcCompat="@drawable/back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Phản hồi chuyến đi"
+            android:textColor="#0F2F80"
+            android:textSize="26dp"
+            android:layout_marginEnd="25dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="392dp"
+        android:layout_height="643dp"
+        android:layout_marginStart="16dp"
+        android:background="#86EDE6E6"
+        android:contentDescription="@string/app_name"
+        android:padding="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+        <LinearLayout
+            android:layout_width="380dp"
+            android:layout_height="540dp"
+            android:layout_margin="4dp"
+            android:background="#86EDE6E6"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:background="#34F1ECEC"
+                android:text="Khách hàng phản hồi"
+                android:textColor="#0F2F80"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:background="#34F1ECEC"
+                android:text="@string/phanhoi"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="15dp"
+                android:background="#08F1ECEC"
+                android:text="@string/phanhoi1"
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#BDB3B3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Phiếu thông tin"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Thông tin khách hàng"
+                    android:textColor="#0F2F80"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="4dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:text="Họ tên"
+                            android:textStyle="bold"
+                            android:textColor="#364488"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:layout_width="4dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="5"
+                            android:text=" *"
+                            android:textColor="#B30101"
+                            android:textSize="22dp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/round_border1"
+                        android:drawablePadding="16dp"
+                        android:hint="Nhập họ và tên"
+                        android:inputType="textPersonName"
+                        android:padding="16dp"
+                        android:textSize="18dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="4dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="0.9"
+                            android:text="Email"
+                            android:textStyle="bold"
+                            android:textColor="#364488"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:layout_width="4dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="5.2"
+                            android:text=" *"
+                            android:textColor="#B30101"
+                            android:textSize="22dp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/round_border1"
+                        android:drawablePadding="16dp"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:padding="16dp"
+                        android:textSize="18dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="4dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1.5"
+                            android:text="Di động"
+                            android:textColor="#364488"
+                            android:textSize="18dp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="4dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="5.5"
+                            android:text=" *"
+                            android:textColor="#B30101"
+                            android:textSize="22dp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/round_border1"
+                        android:drawablePadding="16dp"
+                        android:hint="Số điện thoại"
+                        android:inputType="phone"
+                        android:padding="16dp"
+                        android:textSize="18dp"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="4dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1.3"
+                            android:text="Địa chỉ"
+                            android:textColor="#364488"
+                            android:textSize="18dp"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="4dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="4.9"
+                            android:text=" *"
+                            android:textColor="#B30101"
+                            android:textSize="22dp" />
+                    </LinearLayout>
+
+
+                    <EditText
+                        android:id="@+id/diachi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/round_border1"
+                        android:drawablePadding="16dp"
+                        android:hint="Địa chỉ"
+                        android:inputType="text"
+                        android:minHeight="48dp"
+                        android:padding="16dp"
+                        android:textSize="18dp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="9dp"
+                android:text="Thông tin chuyến đi"
+                android:textColor="#0F2F80"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="383dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="3.2"
+                        android:text="Chương trình Tour"
+                        android:textColor="#364488"
+                        android:textSize="18dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="3.9"
+                        android:text=" *"
+                        android:textColor="#B30101"
+                        android:textSize="22dp" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/tour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/round_border1"
+                    android:drawablePadding="16dp"
+                    android:hint="Chương trình Tuor"
+                    android:inputType="textPersonName"
+                    android:padding="16dp"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1.4"
+                        android:text="Mã Tour"
+                        android:textColor="#364488"
+                        android:textStyle="bold"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5.2"
+                        android:text=" *"
+                        android:textColor="#B30101"
+                        android:textSize="22dp" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/matour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/round_border1"
+                    android:drawablePadding="16dp"
+                    android:hint="Mã Tour"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:layout_marginBottom="15dp"
+                    android:textSize="18dp" />
+
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="9dp"
+                android:text="Góp ý khách hàng"
+                android:textColor="#0F2F80"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="5dp"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="9dp"
+                    android:text="Quý khách thích điều gì trong chương trình tour này?"
+                    android:textColor="#0F2F80"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/nd1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/round_border1"
+                    android:drawablePadding="16dp"
+                    android:hint=" "
+                    android:inputType="textMultiLine"
+                    android:padding="16dp"
+                    android:textSize="18dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="9dp"
+                    android:text="Điều gì trong chương trình du lịch này khiến qúy khách không hài lòng?"
+                    android:textColor="#0F2F80"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/nd2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/round_border1"
+                    android:drawablePadding="16dp"
+                    android:hint=" "
+                    android:inputType="textMultiLine"
+                    android:padding="16dp"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="9dp"
+                    android:text="Đánh giá"
+                    android:textColor="#0F2F80"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+                <RatingBar
+                    android:id="@+id/ratingbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/app_name"
+                    android:numStars="5"
+                    android:rating="0"
+                    android:stepSize="0.5"/>
+                <TextView
+                    android:id="@+id/textcount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="22dp"
+                    android:layout_marginStart="5dp"
+                    android:textStyle="italic"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="9dp"
+                    android:text="Ý kiến khác"
+                    android:textColor="#0F2F80"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/nd3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/round_border1"
+                    android:drawablePadding="16dp"
+                    android:hint=" "
+                    android:inputType="textMultiLine"
+                    android:padding="16dp"
+                    android:layout_marginBottom="15dp"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btndanhgia"
+                android:layout_width="320dp"
+                android:layout_height="52dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/custom_buttom_2"
+                android:text="Gửi phản hồi"
+                android:textColor="@color/white"
+                android:textSize="22dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

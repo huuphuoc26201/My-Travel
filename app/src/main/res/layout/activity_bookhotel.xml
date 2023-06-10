@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".bookHotel">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/app_name"
+        android:layout_above="@id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btnbook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:layout_gravity="top"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/bien_phuquoc" />
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:background="#59000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+            <ImageView
+
+                android:id="@+id/imageView2"
+                android:layout_width="35dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="16dp"
+                android:background="#70000000"
+                android:contentDescription="@string/app_name"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:onClick="prev"
+                android:src="@drawable/prev"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="5dp"
+                android:background="#70000000"
+                android:contentDescription="@string/app_name"
+                android:onClick="next"
+                android:src="@drawable/next1"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="See all room"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/imageView8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/tm"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="-31dp"
+                android:layout_marginEnd="22dp"
+                android:src="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/tim"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="-31dp"
+                android:layout_marginEnd="22dp"
+                android:src="@drawable/tim1"
+                android:onClick="favorite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/huytim"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="-31dp"
+                android:layout_marginEnd="22dp"
+                android:src="@drawable/tim"
+                android:onClick="unfavorite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="12dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView12"
+                app:srcCompat="@drawable/img1" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="6dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+                app:layout_constraintStart_toEndOf="@+id/imageView8"
+                app:layout_constraintTop_toTopOf="@+id/imageView8"
+                app:srcCompat="@drawable/img2" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="8dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+                app:layout_constraintStart_toEndOf="@+id/imageView11"
+                app:layout_constraintTop_toTopOf="@+id/imageView11"
+                app:srcCompat="@drawable/img2" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="6dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintTop_toTopOf="@+id/imageView9"
+                app:srcCompat="@drawable/img3" />
+
+            <TextView
+                android:id="@+id/place_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Mughal Gardens, Srinagar"
+                android:textColor="@android:color/background_dark"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imageView8"
+                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="345dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="8dp"
+                android:text="Thủ Đức, Hồ Chí Minh"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/place_name" />
+
+            <TextView
+                android:id="@+id/vitri"
+                android:layout_width="22dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="-2dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/ic_baseline_location_on_24"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/textView53"
+                app:layout_constraintEnd_toStartOf="@+id/textView53"
+                app:layout_constraintTop_toTopOf="@+id/textView53" />
+
+            <RatingBar
+                android:id="@+id/ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:layout_marginStart="-87dp"
+                android:contentDescription="@string/app_name"
+                android:numStars="5"
+                android:rating="0"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                app:layout_constraintStart_toStartOf="@+id/textView53"
+                app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+            <ImageView
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="750dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toTopOf="@+id/textView57"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="30dp"
+                android:fontFamily="@font/rubik"
+                android:gravity="center"
+                android:text="4.5"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingbar"
+                app:layout_constraintEnd_toEndOf="@+id/ratingbar"
+                app:layout_constraintTop_toTopOf="@+id/ratingbar" />
+
+            <TextView
+                android:id="@+id/textView56"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Tổng quan:"
+                android:textColor="#112F6A"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/about"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ratingbar" />
+
+            <TextView
+                android:id="@+id/textView57"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Tiện nghi-dịch vụ khách sạn"
+                android:textColor="#112F6A"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/dichvu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.01"
+                app:layout_constraintStart_toStartOf="parent" />
+            <ImageView
+                android:id="@+id/dichvu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/dichvu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+               />
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnbook"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="15dp"
+        android:background="#EDFF5722"
+        android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+        android:gravity="center"
+        android:onClick="booking"
+        android:padding="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Book Now"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/button"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="20dp"
+        android:background="#45CFCAC9"
+        android:gravity="center"
+        android:text="325.000 VNĐ"
+        android:layout_marginBottom="15dp"
+        android:textColor="#050505"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnbook"
+        app:layout_constraintTop_toTopOf="@+id/btnbook"
+        app:layout_constraintVertical_bias="0.0" />
+</RelativeLayout>

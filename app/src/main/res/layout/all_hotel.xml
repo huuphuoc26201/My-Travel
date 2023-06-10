@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="240dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="13dp"
+    android:layout_marginTop="19dp"
+    android:layout_marginEnd="5dp"
+    android:layout_gravity="center|top"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/custom_button_6">
+
+    <ImageView
+        android:id="@+id/place_image"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bien_phuquoc" />
+
+
+    <TextView
+        android:id="@+id/place_name"
+        android:layout_width="225dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="Hotel Tùy Anh Chọn Phú Quốc"
+        android:gravity="top"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/place_image"
+        app:layout_constraintTop_toBottomOf="@+id/place_image" />
+
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="3.325.000Đ"
+        android:textColor="#C81212"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/place_name"
+        app:layout_constraintTop_toBottomOf="@+id/place_name" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" / đêm"
+        android:textColor="#9E000000"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/money"
+        app:layout_constraintStart_toEndOf="@+id/money"
+        app:layout_constraintTop_toTopOf="@+id/money" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/rubik"
+        android:gravity="center"
+        android:text="4.5"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ratingbar"
+        app:layout_constraintEnd_toEndOf="@+id/ratingbar"
+        app:layout_constraintTop_toTopOf="@+id/ratingbar" />
+
+    <RatingBar
+        android:id="@+id/ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="start"
+        android:layout_marginStart="-65dp"
+        android:layout_marginTop="-5dp"
+        android:contentDescription="@string/app_name"
+        android:numStars="5"
+        android:rating="0"
+        android:scaleX="0.4"
+        android:scaleY="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/money" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

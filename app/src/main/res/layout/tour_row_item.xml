@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="9dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="7dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/custom_button_6">
+
+
+    <ImageView
+        android:id="@+id/place_image"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bien_phuquoc" />
+
+    <TextView
+        android:id="@+id/place_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Bãi  biển Phú Quốc"
+        android:textColor="#E2000000"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/place_image"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/place_image" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Giá: "
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/place_name"
+        app:layout_constraintTop_toBottomOf="@+id/place_name" />
+
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1.250.000đ"
+        android:textColor="#C81212"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/price"
+        app:layout_constraintStart_toEndOf="@+id/price"
+        app:layout_constraintTop_toTopOf="@+id/price"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:drawableLeft="@drawable/ic_baseline_not_started_24"
+        android:gravity="center_vertical"
+        android:text=" Khởi hành: "
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/price" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
+        android:gravity="center_vertical"
+        android:text=" Thời gian: "
+        android:textSize="18dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView23"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView23"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/start1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thứ 2 hàng tuần"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView23"
+        app:layout_constraintStart_toEndOf="@+id/textView23"
+        app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2 ngày 1 đêm"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView24"
+        app:layout_constraintEnd_toEndOf="@+id/start1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView24"
+        app:layout_constraintTop_toTopOf="@+id/textView24" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
