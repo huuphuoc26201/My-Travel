@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_gravity="center"
-        android:background="#30B1A7A7"
+        android:background="@drawable/home_bg"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,8 +26,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
-            android:background="#FAF3F3"
-            app:srcCompat="@drawable/back" />
+            app:srcCompat="@drawable/ic_arrow_back_black_24dp"  />
 
         <TextView
             android:layout_width="match_parent"
@@ -36,7 +35,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Đánh giá app My Travel"
-            android:textColor="#0F2F80"
+            android:textColor="@color/white"
             android:textSize="26dp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -65,6 +64,7 @@
                     android:layout_height="80dp"
                     android:background="#34F1ECEC"
                     android:gravity="center"
+                    android:lineSpacingExtra="3dp"
                     android:text="Chúng tôi luôn lắng nge đánh giá, phản hồi của khánh hàng để hoàn thiện sản phẩm của mình."
                     android:textSize="17dp" />
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -14,16 +14,15 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.adapter.SendMail;
 import com.example.model.feedBackData;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Random;
 
 public class feedBack extends AppCompatActivity {
     EditText nd1,nd2,nd3;
@@ -154,6 +153,19 @@ public class feedBack extends AppCompatActivity {
         sm.execute();
     }
 
+    public String generateRandomString() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder(10);
+        Random random = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            sb.append(randomChar);
+        }
+
+        return sb.toString();
+    }
     private void guiphanhoi() {
         String ename=name.getText().toString().trim();
         String eemail=email.getText().toString().trim();
@@ -166,24 +178,15 @@ public class feedBack extends AppCompatActivity {
         String ematour=matour.getText().toString();
         temp=txtCount.getText().toString();
 
+        String key=generateRandomString();
         hideSoftKeyborard();
 
         FirebaseDatabase database=FirebaseDatabase.getInstance();
         DatabaseReference myref=database.getReference("Phản hồi");
 
         feedBackData feedBack=new feedBackData(ename,eemail,ephone,ediachi,etentour,ematour,end1,end2,temp,end3);
-        String pathname=String.valueOf(feedBack.getName());
 
-        if (ename.equals(pathname)){
-            myref.child(pathname).setValue(feedBack, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                    Intent intent=new Intent(feedBack.this, Account.class);
-                    startActivity(intent);
-
-                }
-            });
-        }
+        myref.child(key).setValue(feedBack);
     }
     public void hideSoftKeyborard(){
         try{

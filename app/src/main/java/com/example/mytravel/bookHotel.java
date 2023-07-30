@@ -8,7 +8,6 @@ import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -32,13 +31,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class bookHotel extends AppCompatActivity {
     ImageView imageUrl,imageUrl1,imageUrl2,imageUrl3,imageUrl4,about,back;
-    TextView name,diachi,danhgia;
-    Button book;
-    TextView gia;
+    TextView name,diachi,danhgia,money;
+    TextView book;
     RatingBar ratingbar;
     CircleImageView tym,huytym;
     int n=0;
-    int tim=0;
     private static final int REQUEST_CALL = 1;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     @Override
@@ -60,8 +57,8 @@ public class bookHotel extends AppCompatActivity {
         diachi=(TextView) findViewById(R.id.textView53);
         about=(ImageView) findViewById(R.id.about);
         danhgia=(TextView) findViewById(R.id.textView7);
-        book=(Button) findViewById(R.id.btnbook);
-        gia=(TextView) findViewById(R.id.button);
+        money=(TextView) findViewById(R.id.money);
+        book=findViewById(R.id.button);
         ratingbar=(RatingBar) findViewById(R.id.ratingbar);
 
         thatym();
@@ -83,15 +80,20 @@ public class bookHotel extends AppCompatActivity {
                 .into(about);
         name.setText(getIntent().getStringExtra("name"));
         diachi.setText(getIntent().getStringExtra("diachi"));
-        gia.setText(getIntent().getStringExtra("gia"));
         danhgia.setText(getIntent().getStringExtra("danhgia"));
+        money.setText(getIntent().getStringExtra("gia")+" / đêm");
         ratingbar.setRating(Float.parseFloat(getIntent().getStringExtra("danhgia")));
-
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(bookHotel.this,Hotel.class);
+                String back=getIntent().getStringExtra("back");
+                Intent intent;
+                if(back!=null){
+                    intent = new Intent(bookHotel.this, Home.class);
+                }else {
+                    intent = new Intent(bookHotel.this, Hotel.class);
+                }
                 startActivity(intent);
             }
         });
@@ -272,5 +274,22 @@ public class bookHotel extends AppCompatActivity {
                 // Xảy ra lỗi trong quá trình đọc dữ liệu
             }
         });
+    }
+    public void booking(View view){
+        Intent intent=new Intent(bookHotel.this,orderHotel.class);
+        String n1 = getIntent().getStringExtra("gia");
+        n1 = n1.replace(".", ""); // Loại bỏ dấu chấm
+        n1 = n1.replace(" VNĐ", ""); // Loại bỏ chữ VNĐ
+        intent.putExtra("money",n1);
+        intent.putExtra("imageUrl",getIntent().getStringExtra("imageUrl"));
+        intent.putExtra("imageUrl1",getIntent().getStringExtra("imageUrl1"));
+        intent.putExtra("imageUrl2",getIntent().getStringExtra("imageUrl2"));
+        intent.putExtra("imageUrl3",getIntent().getStringExtra("imageUrl3"));
+        intent.putExtra("about",getIntent().getStringExtra("about"));
+        intent.putExtra("diachi",getIntent().getStringExtra("diachi"));
+        intent.putExtra("name",getIntent().getStringExtra("name"));
+        intent.putExtra("danhgia",getIntent().getStringExtra("danhgia"));
+        intent.putExtra("gia",getIntent().getStringExtra("gia"));
+        startActivity(intent);
     }
 }

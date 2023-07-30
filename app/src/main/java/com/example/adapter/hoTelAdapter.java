@@ -1,11 +1,7 @@
 package com.example.adapter;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.model.hoTelData;
+import com.example.mytravel.Hotel;
 import com.example.mytravel.R;
 import com.example.mytravel.bookHotel;
 
@@ -62,19 +57,10 @@ public class hoTelAdapter extends RecyclerView.Adapter<hoTelAdapter.HotelViewHol
             @Override
             public void onClick(View v) {
                 String address =data_position.getVitri();
-                Uri intentUri = Uri.parse("geo:0,0?q=" + Uri.encode(address));
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, intentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                if (ContextCompat.checkSelfPermission(context,
-                        Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions((Activity) context,
-                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                            1);
-                    return;
-                }
-                mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(mapIntent);
+                Intent intent=new Intent(context, Hotel.class);
+                intent.putExtra("location",address);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
 

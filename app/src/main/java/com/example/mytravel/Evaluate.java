@@ -12,16 +12,15 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.adapter.SendMail;
 import com.example.model.danhGiaData;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Random;
 
 
 public class Evaluate extends AppCompatActivity {
@@ -163,29 +162,31 @@ public class Evaluate extends AppCompatActivity {
             return true;
         }
     }
+    public String generateRandomString() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder(10);
+        Random random = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            sb.append(randomChar);
+        }
+
+        return sb.toString();
+    }
     private void danhgia() {
         String name=edtname.getText().toString().trim();
         String email=edtemail.getText().toString().trim();
         String noi_dung = noidung.getText().toString().trim();
         temp=txtCount.getText().toString();
-
+        String key=generateRandomString();
 
         FirebaseDatabase database=FirebaseDatabase.getInstance();
         DatabaseReference myref=database.getReference("Đánh giá");
-
         danhGiaData danhgia=new danhGiaData(name,email,noi_dung,temp);
-        String pathname=String.valueOf(danhgia.getName());
+        myref.child(key).setValue(danhgia);
 
-        if (name.equals(pathname)){
-            myref.child(pathname).setValue(danhgia, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                    Intent intent=new Intent(Evaluate.this, Account.class);
-                    startActivity(intent);
-
-                }
-            });
-        }
     }
 
 }

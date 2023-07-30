@@ -1,12 +1,19 @@
 package com.example.mytravel;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +25,7 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.model.TourData;
-import com.example.model.gioHangData;
+import com.example.model.payTourData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,10 +36,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.Random;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    private ImageView imageview,back,image_view,image_view1,image_view2,thatym,huytym,star,lttour,lttour1;
+    private ImageView imageview,back,image_view,image_view1,image_view2,thatym,huytym,star,lttour,lttour1,setdate;
     private TextView time,trip,phone;
     private TextView matour;
     private TextView placename;
@@ -41,8 +49,9 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView gia1;
     private TextView gia2;
     private Button booking;
-    private TextView chonngay;
+    private EditText chonngay;
     private TextView gia3,nglon,treem;
+    private Calendar calendar;
     private static final int REQUEST_CALL = 1;
     int famount=0;
     int famount1=0;
@@ -52,12 +61,12 @@ public class DetailsActivity extends AppCompatActivity {
     int n=0;
     int i=0;
     int j=0;
-    int tim=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-        chonngay=(TextView) findViewById(R.id.chonngay);
+        chonngay=(EditText) findViewById(R.id.chonngay);
+        setdate=findViewById(R.id.imageView3);
         booking=(Button) findViewById(R.id.button);
         imageview= (ImageView) findViewById(R.id.imageView);
         image_view= (ImageView) findViewById(R.id.imageView8);
@@ -100,20 +109,19 @@ public class DetailsActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(DetailsActivity.this, Tour.class);
+                String back=getIntent().getStringExtra("back");
+                Intent intent;
+                if(back!=null){
+                    intent = new Intent(DetailsActivity.this, Home.class);
+                }else{
+                    intent = new Intent(DetailsActivity.this, Tour.class);
+                }
                 startActivity(intent);
+
             }
         });
-
         favotire();
 
-        chonngay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                chonngay();
-            }
-        });
 
         Glide.with(DetailsActivity.this).load(getIntent().getStringExtra("imageUrl"))
                 .into(imageview);
@@ -144,8 +152,118 @@ public class DetailsActivity extends AppCompatActivity {
         famount3= (int) (famount2+price);
         sum=famount+famount2;
         gia3.setText(decimalFormat.format(sum)+" ₫");
-    }
 
+        calendar = Calendar.getInstance();
+
+        chonngay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyborard();
+                showDatePickerDialog();
+            }
+        });
+        setdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
+    }
+    private void showDatePickerDialog() {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, monthOfYear);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String selectedDate = DateFormat.format("dd/MM/yyyy", calendar).toString();
+                chonngay.setText(selectedDate);
+            }
+        };
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                DetailsActivity.this,
+                dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000); // Ẩn ngày trước ngày hiện tại
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            datePickerDialog.setOnDateSetListener(dateSetListener);
+        }
+        datePickerDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // Xử lý khi bảng ngày tháng bị hủy
+            }
+        });
+
+        // Ẩn các ngày thứ 2 và thứ 5
+        String textDate = matour.getText().toString();
+        String textDateTime = start.getText().toString();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            datePickerDialog.getDatePicker().setOnDateChangedListener(new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    Calendar selectedCalendar = Calendar.getInstance();
+                    selectedCalendar.set(Calendar.YEAR, year);
+                    selectedCalendar.set(Calendar.MONTH, monthOfYear);
+                    selectedCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                    int selectedDayOfWeek = selectedCalendar.get(Calendar.DAY_OF_WEEK);
+
+                        if (textDate.toLowerCase().contains("NHPT01".toLowerCase())||textDate.toLowerCase().contains("NHPT14".toLowerCase())) {
+                            if (selectedDayOfWeek != 5) {
+                                // Nếu không là thứ 5, không cho phép chọn
+                                Toast.makeText(getApplicationContext(),"Quý khách vui lòng Chọn lại. Chương trình Tuor bắt đầu từ ngày " + textDateTime,Toast.LENGTH_SHORT).show();
+                                view.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),this);
+                            }
+                        }else if (textDate.toLowerCase().contains("NHPT02".toLowerCase())||textDate.toLowerCase().contains("NHPT03".toLowerCase())||textDate.toLowerCase().contains("NHPT05".toLowerCase())) {
+                            if (selectedDayOfWeek != 2||selectedDayOfWeek != 7 ) {
+                            // Nếu không là thứ 2 và thứ 7, không cho phép chọn
+                            Toast.makeText(DetailsActivity.this, "Quý khách vui lòng Chọn lại. Chương trình Tuor bắt đầu từ ngày " + textDateTime, Toast.LENGTH_SHORT).show();
+                                view.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),this);
+                        }
+                    }else if (textDate.toLowerCase().contains("NHPT04".toLowerCase())||textDate.toLowerCase().contains("NHPT09".toLowerCase())||textDate.toLowerCase().contains("NHPT10".toLowerCase())
+                            ||textDate.toLowerCase().contains("NHPT17".toLowerCase())||textDate.toLowerCase().contains("NHPT18".toLowerCase())||textDate.toLowerCase().contains("NHPT20".toLowerCase())) {
+                            if (selectedDayOfWeek != 7) {
+                            // Nếu không là thứ 7, không cho phép chọn
+                            Toast.makeText(DetailsActivity.this, "Quý khách vui lòng Chọn lại. Chương trình Tuor bắt đầu từ ngày " + textDateTime, Toast.LENGTH_SHORT).show();
+                                view.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),this);
+                        }
+                    }else if (textDate.toLowerCase().contains("NHPT06".toLowerCase())||textDate.toLowerCase().contains("NHPT07".toLowerCase())) {
+                            if (selectedDayOfWeek != 1) {
+                            // Nếu không là chủ nhật, không cho phép chọn
+                            Toast.makeText(DetailsActivity.this, "Quý khách vui lòng Chọn lại. Chương trình Tuor bắt đầu từ ngày " + textDateTime, Toast.LENGTH_SHORT).show();
+                                view.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),this);
+                        }
+                    }else if (textDate.toLowerCase().contains("NHPT08".toLowerCase())||textDate.toLowerCase().contains("NHPT12".toLowerCase())||textDate.toLowerCase().contains("NHPT16".toLowerCase())) {
+                            if (selectedDayOfWeek != 4) {
+                            // Nếu không là thứ 4, không cho phép chọn
+                            Toast.makeText(DetailsActivity.this, "Quý khách vui lòng Chọn lại. Chương trình Tuor bắt đầu từ ngày " + textDateTime, Toast.LENGTH_SHORT).show();
+                                view.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),this);
+                        }
+                    }else if (textDate.toLowerCase().contains("NHPT13".toLowerCase())||textDate.toLowerCase().contains("NHPT19".toLowerCase())) {
+                            if (selectedDayOfWeek !=2) {
+                            // Nếu không là thứ 2, không cho phép chọn
+                            Toast.makeText(DetailsActivity.this, "Quý khách vui lòng Chọn lại. Chương trình Tuor bắt đầu từ ngày " + textDateTime, Toast.LENGTH_SHORT).show();
+                                view.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),this);
+                        }
+                    }else if (textDate.toLowerCase().contains("NHPT15".toLowerCase())||textDate.toLowerCase().contains("NHPT11".toLowerCase())) {
+                            if (selectedDayOfWeek !=6) {
+                            // Nếu không là thứ 6, không cho phép chọn
+                            Toast.makeText(DetailsActivity.this, "Quý khách vui lòng Chọn lại. Chương trình Tuor bắt đầu từ ngày " + textDateTime, Toast.LENGTH_SHORT).show();
+                                view.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),this);
+                        }
+                    }
+                }
+            });
+        }
+        datePickerDialog.show();
+    }
     private void favotire() {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -191,24 +309,6 @@ public class DetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void chonngay() {
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        // Tạo DatePickerDialog và ẩn các ngày trước ngày hiện tại
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                (view, selectedYear, selectedMonth, selectedDay) -> {
-                    // Hiển thị ngày đã chọn trên TextView
-                    String date = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
-                    chonngay.setText(date);
-
-                }, year, month, day);
-        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-
-        datePickerDialog.show();
-    }
 
     public void add_nl(View view){
         i++;
@@ -343,44 +443,64 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
     }
+    public String generateRandomString() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder(10);
+        Random random = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            sb.append(randomChar);
+        }
+
+        return sb.toString();
+    }
     public void booking(View view){
-        String Date = chonngay.getText().toString();
+        String Date = chonngay.getText().toString().trim();
         String ten = getIntent().getStringExtra("placeName");
         String ha = getIntent().getStringExtra("imageUrl");
         String matour = getIntent().getStringExtra("maTour");
         int sluong= Integer.parseInt(nglon.getText().toString());
         int sluong1= Integer.parseInt(treem.getText().toString());
+        String id=generateRandomString();
+        long gia = Long.parseLong(getIntent().getStringExtra("money"));
+        long giamoi = sluong * gia + sluong1 * gia / 2;
 
-        if(sluong>0||sluong1>0) {
-            if (Home.manggiohang.size() > 0) {
-                boolean exists = false;
-                for (int i = 0; i < Home.manggiohang.size(); i++) {
-                    if (Home.manggiohang.get(i).getTentour() == ten && Home.manggiohang.get(i).getDate() == Date) {
-                        long gia = Long.parseLong(getIntent().getStringExtra("money"));
-                        int sl= Integer.parseInt(nglon.getText().toString());
-                        int sl1= Integer.parseInt(treem.getText().toString());
-                        Home.manggiohang.get(i).setNglon(Home.manggiohang.get(i).getNglon() + sl);
-                        Home.manggiohang.get(i).setTreem(Home.manggiohang.get(i).getTreem() + sl1);
-                        Home.manggiohang.get(i).setGiatour(gia * Home.manggiohang.get(i).getNglon() + gia * Home.manggiohang.get(i).getTreem());
-                        exists = true;
+        payTourData payTourData=new payTourData(id,ten,String.valueOf(giamoi),ha,Date,String.valueOf(sluong),String.valueOf(sluong1),matour);
+
+        if(sluong>0 ) {
+            if(!Date.isEmpty()) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user == null) {
+                    return;
+                }
+                String eemail = user.getEmail();
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tài Khoản");
+                ref.orderByChild("email").equalTo(eemail).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                com.example.model.user User = ds.getValue(com.example.model.user.class);
+                                if (User != null) {
+                                    String key = User.getKey();
+                                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("manyTour").child(key);
+                                    myRef.child(id).setValue(payTourData);
+                                }
+                            }
+                        }
                     }
-                }
-                if (exists == false) {
-                    long gia = Long.parseLong(getIntent().getStringExtra("money"));
-                    long giamoi = sluong * gia + sluong1 * gia / 2;
-                    gioHangData gioHangData=new gioHangData(ten, giamoi, ha, Date, sluong, sluong1,matour);
-                    giohangDatabase.getInstance(this).userDao().insertgiohang(gioHangData);
-                    Home.manggiohang.add(gioHangData);
-                }
-            } else {
-                long gia = Long.parseLong(getIntent().getStringExtra("money"));
-                long giamoi = sluong * gia + sluong1 * gia / 2;
-                gioHangData gioHangData=new gioHangData(ten, giamoi, ha, Date, sluong, sluong1,matour);
-                giohangDatabase.getInstance(this).userDao().insertgiohang(gioHangData);
-                Home.manggiohang.add(gioHangData);
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Xảy ra lỗi trong quá trình đọc dữ liệu
+                    }
+                });
+                Intent intent = new Intent(DetailsActivity.this, payTour.class);
+                startActivity(intent);
+            }else {
+                Toast.makeText(DetailsActivity.this, "Vui lòng chọn ngày đi!", Toast.LENGTH_LONG).show();
             }
-            Intent intent = new Intent(DetailsActivity.this, booking.class);
-            startActivity(intent);
         }
         else{
             Toast.makeText(DetailsActivity.this,"Vui lòng nhập số lượng người đi!",Toast.LENGTH_LONG).show();
@@ -388,6 +508,13 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
-
+    public void hideSoftKeyborard(){
+        try{
+            InputMethodManager inputMethodManager=(InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        }catch (NullPointerException ex){
+            ex.printStackTrace();
+        }
+    }
 
 }

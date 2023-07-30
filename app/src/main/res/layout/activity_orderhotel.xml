@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".orderHotel">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
+        android:padding="3dp"
+        app:layout_constraintVertical_bias="0.0">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="30dp"
+                android:text="Booking Hotel"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FF5722"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/textView43"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/round_border1"
+                android:drawableLeft="@drawable/ic_baseline_person"
+                android:drawablePadding="15dp"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:padding="16dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/name"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/round_border1"
+                android:drawableLeft="@drawable/ic_baseline_local_phone"
+                android:drawablePadding="15dp"
+                android:hint="Mobile"
+                android:inputType="phone"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/phone"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/round_border1"
+                android:drawableLeft="@drawable/ic_baseline_email_24"
+                android:drawablePadding="15dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+
+            <EditText
+                android:id="@+id/persons"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/email"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/round_border1"
+                android:drawableLeft="@drawable/ic_baseline_add_reaction_24"
+                android:drawablePadding="15dp"
+                android:hint="Number of Persons"
+                android:inputType="phone"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+            <EditText
+                android:id="@+id/child"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@+id/persons"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/round_border1"
+                android:drawableLeft="@drawable/ic_baseline_face_retouching_natural_24"
+                android:drawablePadding="15dp"
+                android:hint="Number of Child"
+                android:inputType="phone"
+                android:padding="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
+
+            <TextView
+                android:id="@+id/paytotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/child"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/numberrooms"
+                android:text="12222"
+                android:textColor="#D7000000"
+                android:textSize="20dp"
+                android:visibility="gone"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/numberrooms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/child"
+                android:layout_alignStart="@+id/child"
+                android:layout_marginTop="15dp"
+                android:text="Number of Rooms:"
+                android:textColor="#D7000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/numberRooms"
+                android:layout_width="250dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="48dp"
+                android:background="@drawable/round_border"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:inputType="phone"
+                android:layout_below="@+id/numberrooms"
+                android:textSize="20dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/add"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@+id/numberRooms"
+                android:layout_alignEnd="@+id/numberRooms"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="13dp"
+                android:background="@drawable/ic_baseline_add_circle_24"
+                android:contentDescription="@string/app_name"
+                android:onClick="add" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/sub"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignStart="@+id/numberRooms"
+                android:layout_alignTop="@+id/numberRooms"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_baseline_remove_circle_24"
+                android:contentDescription="@string/app_name"
+                android:onClick="sub" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/numberRooms"
+                android:layout_alignStart="@+id/persons"
+                android:layout_marginTop="20dp"
+                android:text="From Date:"
+                android:textColor="#D7000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/fromdate"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/textView"
+                android:layout_alignStart="@+id/textView"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="-5dp"
+                app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
+
+            <EditText
+                android:id="@+id/chonngay"
+                android:layout_width="290dp"
+                android:layout_height="45dp"
+                android:layout_alignTop="@+id/fromdate"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/fromdate"
+                android:background="#F8F4EFEF"
+                android:ems="10"
+                android:inputType="number"
+                android:padding="10dp"
+                android:hint="__ /__ /____"
+                android:textColorHint="@color/black"
+                android:textSize="19dp" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fromdate"
+                android:layout_alignStart="@+id/persons"
+                android:layout_marginTop="30dp"
+                android:text="To Date:"
+                android:textColor="#D7000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/todate"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/fromdate"
+                android:layout_alignStart="@+id/fromdate"
+                android:layout_marginTop="70dp"
+                app:srcCompat="@drawable/ic_baseline_calendar_month_24" />
+
+            <EditText
+                android:id="@+id/denngay"
+                android:layout_width="290dp"
+                android:layout_height="45dp"
+                android:background="#F8F4EFEF"
+                android:layout_alignTop="@+id/todate"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/todate"
+                android:ems="10"
+                android:inputType="number"
+                android:padding="10dp"
+                android:hint="__ /__ /____"
+                android:textColorHint="@color/black"
+                android:textSize="19dp" />
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="19dp"
+                android:text="Total Amount"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/todate"
+                android:layout_alignStart="@+id/todate"/>
+
+            <EditText
+                android:id="@+id/total"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textView42"
+                android:layout_alignStart="@+id/textView42"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:hint="0đ"
+                android:textColorHint="@color/black"
+                android:textSize="19dp"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="PAYMENT METHODS"
+                android:textColor="#D7E60A0A"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginEnd="20dp"
+                android:layout_below="@+id/total"
+                android:layout_alignStart="@+id/total"/>
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/textView44"
+                android:layout_alignStart="@+id/textView44"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/tructiep"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:background="#2DDA93"
+                    android:gravity="center"
+                    android:text="Direct   "
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/momo"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:background="#b0006d"
+                    android:gravity="center"
+                    android:text="Momo   "
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+            </RadioGroup>
+            <TextView
+                android:id="@+id/pev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radioGroup"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="-16dp"
+                android:layout_marginBottom="10dp"
+                android:layout_alignStart="@+id/radioGroup"
+                android:text=" Quay lại"
+                android:textSize="18dp"
+                android:fontFamily="serif"
+                android:onClick="pev"
+                android:padding="5dp"
+                android:drawableLeft="@drawable/ic_baseline_arrow_back"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

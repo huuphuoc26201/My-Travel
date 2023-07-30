@@ -72,14 +72,12 @@
 
             <ImageView
                 android:id="@+id/imageView14"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignStart="@+id/editText"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignTop="@+id/editText"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="335dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="17dp"
                 android:layout_marginBottom="37dp"
                 app:srcCompat="@drawable/ic_search_black_24dp" />
 
@@ -100,11 +98,12 @@
         android:id="@+id/recyclerview"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="#90F3ECEC"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/spn_catogory"
         android:layout_alignParentBottom="true"
-         />
+        android:layout_marginTop="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:background="#90F3ECEC" />
 
     <View
         android:id="@+id/view7"

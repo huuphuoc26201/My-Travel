@@ -59,15 +59,17 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/textView21"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
         android:background="@drawable/avt_1" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/go"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_alignTop="@+id/imageView12"
-        android:layout_marginTop="366dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="366dp"
+        android:layout_marginBottom="43dp"
         android:background="@drawable/custom_button_3"
         android:fontFamily="sans-serif-medium"
         android:text="Go"

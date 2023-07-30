@@ -209,16 +209,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="Photogellery"
+                    android:text="Hình ảnh"
+                    android:textStyle="bold"
                     android:textSize="16dp"
-                    android:textColor="@android:color/background_dark"
-                    app:layout_constraintStart_toStartOf="@+id/textView9"
+                    android:textColor="@color/black"                    app:layout_constraintStart_toStartOf="@+id/textView9"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <ImageView
                     android:id="@+id/imageView8"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="110dp"
+                    android:layout_height="105dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:scaleType="centerCrop"
@@ -228,9 +228,9 @@
 
                 <ImageView
                     android:id="@+id/imageView9"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_width="110dp"
+                    android:layout_height="105dp"
+                    android:layout_marginStart="9dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView8"
                     app:layout_constraintStart_toEndOf="@+id/imageView8"
@@ -239,15 +239,14 @@
 
                 <ImageView
                     android:id="@+id/imageView10"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_width="110dp"
+                    android:layout_height="105dp"
+                    android:layout_marginStart="9dp"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView9"
                     app:layout_constraintStart_toEndOf="@+id/imageView9"
                     app:layout_constraintTop_toTopOf="@+id/imageView9"
                     app:srcCompat="@drawable/img3" />
-
 
                 <TextView
                     android:id="@+id/textView13"
@@ -256,9 +255,10 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="About "
-                    android:textColor="@android:color/background_dark"
+                    android:text="Tổng quan "
+                    android:textColor="@color/black"
                     android:textSize="16dp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
@@ -271,7 +271,9 @@
                     android:layout_marginBottom="20dp"
                     android:text="Mughal Gardens which have truly changed the face of the Mughal Empire is one of the most popular and the most visited tourist attractions of Srinagar."
                     android:textSize="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textColor="#495566"
+                    android:lineSpacingExtra="8dp"
+                    android:fontFamily="sans-serif"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/textView13"
@@ -286,6 +288,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Hành trình:"
                     android:textSize="16dp"
+                    android:lineSpacingExtra="4dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/place_name"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -308,7 +311,8 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="-7dp"
                     android:text="Số lượng"
                     android:textColor="@color/black"
                     android:textSize="16dp"
@@ -425,11 +429,11 @@
                     android:layout_width="65dp"
                     android:layout_height="42dp"
                     android:layout_marginStart="50dp"
+                    android:layout_marginTop="-10dp"
+                    android:background="#F6F5F5"
                     android:gravity="center"
                     android:text="0"
-                    android:background="#F6F5F5"
                     android:textSize="18dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView26"
                     app:layout_constraintStart_toEndOf="@+id/textView26"
                     app:layout_constraintTop_toTopOf="@+id/textView26" />
 
@@ -468,6 +472,7 @@
                     android:layout_marginStart="70dp"
                     android:gravity="center"
                     android:text="0"
+                    android:layout_marginTop="4dp"
                     android:background="#F6F5F5"
                     android:textSize="18dp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView27"
@@ -501,15 +506,15 @@
                     app:layout_constraintStart_toEndOf="@+id/treem"
                     app:layout_constraintTop_toBottomOf="@+id/bton" />
 
-                <TextView
+                <EditText
                     android:id="@+id/chonngay"
                     android:layout_width="330dp"
                     android:layout_height="45dp"
                     android:background="#F8F4EFEF"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:padding="10dp"
-                    android:text="Chọn Ngày đi"
+                    android:hint="__ /__ /____"
                     android:textColorHint="@color/black"
                     android:textSize="19dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView3"
@@ -548,7 +553,7 @@
                         android:layout_height="wrap_content"
                         android:text="Chính sách tour:"
                         android:textColor="#DC0B0B"
-                        android:textSize="17dp"
+                        android:textSize="18dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -556,6 +561,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="15dp"
                         android:padding="5dp"
+                        android:lineSpacingExtra="8dp"
                         android:text="@string/chinhssanhyour"
                         android:textColor="@color/black"
                         android:textSize="16dp"
@@ -728,6 +734,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/tim"
                 android:layout_width="50dp"
@@ -737,7 +744,8 @@
                 android:contentDescription="@string/app_name"
                 android:fontFamily="@font/rubik"
                 android:onClick="tym"
-                app:srcCompat="@drawable/tim1" />
+                app:srcCompat="@drawable/tim1"
+                tools:ignore="DuplicateClickableBoundsCheck" />
             <ImageView
                 android:id="@+id/huytim"
                 android:layout_width="50dp"

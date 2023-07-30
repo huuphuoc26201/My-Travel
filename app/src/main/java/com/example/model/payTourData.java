@@ -1,21 +1,19 @@
 package com.example.model;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "giohang")
-public class gioHangData {
-    @PrimaryKey(autoGenerate = true)
-    public int id;
+public class payTourData {
+    public String id;
     public String tentour;
-    public long giatour;
+    public String giatour;
     public String hinhtour;
     public String date;
-    public int nglon;
-    public int treem;
+    public String nglon;
+    public String treem;
     public String maTour;
+    public payTourData(){
 
-    public gioHangData(String tentour, long giatour, String hinhtour, String date, int nglon, int treem, String maTour) {
+    }
+    public payTourData(String id, String tentour, String giatour, String hinhtour, String date, String nglon, String treem, String maTour) {
+        this.id = id;
         this.tentour = tentour;
         this.giatour = giatour;
         this.hinhtour = hinhtour;
@@ -25,15 +23,11 @@ public class gioHangData {
         this.maTour = maTour;
     }
 
-    public gioHangData() {
-
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -45,11 +39,11 @@ public class gioHangData {
         this.tentour = tentour;
     }
 
-    public long getGiatour() {
+    public String getGiatour() {
         return giatour;
     }
 
-    public void setGiatour(long giatour) {
+    public void setGiatour(String giatour) {
         this.giatour = giatour;
     }
 
@@ -69,19 +63,19 @@ public class gioHangData {
         this.date = date;
     }
 
-    public int getNglon() {
+    public String getNglon() {
         return nglon;
     }
 
-    public void setNglon(int nglon) {
+    public void setNglon(String nglon) {
         this.nglon = nglon;
     }
 
-    public int getTreem() {
+    public String getTreem() {
         return treem;
     }
 
-    public void setTreem(int treem) {
+    public void setTreem(String treem) {
         this.treem = treem;
     }
 
@@ -92,6 +86,4 @@ public class gioHangData {
     public void setMaTour(String maTour) {
         this.maTour = maTour;
     }
-
 }
-

@@ -33,7 +33,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="70dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/rubik_medium"
             android:text="Danh sách yêu thích"
@@ -56,11 +56,25 @@
         android:padding="15dp"
         android:layout_centerHorizontal="true">
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btntour"
+            android:layout_width="180dp"
+            android:layout_height="45dp"
+            android:background="@drawable/custom_button_tour"
+            android:gravity="center"
+            android:text="Tour  "
+            android:onClick="btnTour"
+            android:layout_marginStart="5dp"
+            android:textColor="#FFFFFF"
+            android:textSize="16dp"
+            android:layout_marginEnd="15dp"
+            android:textStyle="bold"
+            />
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnhotel"
             android:layout_width="180dp"
             android:layout_height="45dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/custom_button_tour"
+
+            android:background="@drawable/custom_button_hotel"
             android:gravity="center"
             android:onClick="btnHotel"
             android:text="Hotel &amp; Resort"
@@ -68,33 +82,23 @@
             android:textSize="16dp"
             android:textStyle="bold"
             />
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btntour"
-            android:layout_width="180dp"
-            android:layout_height="45dp"
-            android:background="@drawable/custom_button_hotel"
-            android:gravity="center"
-            android:text="Tour  "
-            android:onClick="btnTour"
-            android:layout_marginStart="5dp"
-            android:textColor="#FFFFFF"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            />
+
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewTour"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentBottom="true"
+        android:visibility="visible"
         android:background="#90F3ECEC" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewHotel"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
+        android:visibility="gone"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentBottom="true"
         tools:listitem="@layout/tour_row_item"

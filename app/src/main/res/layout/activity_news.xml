@@ -9,10 +9,10 @@
         android:id="@+id/textView15"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#30B1A7A7"
+        android:background="@drawable/home_bg"
         android:gravity="center"
         android:text="Tin tức"
-        android:textColor="#03A9F4"
+        android:textColor="@color/white"
         android:textSize="27dp"
         android:layout_marginBottom="0dp"
         android:textStyle="bold"
@@ -82,7 +82,7 @@
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView16"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/textView20"
         android:text="Date"
@@ -100,7 +100,7 @@
         android:layout_width="2dp"
         android:layout_height="23dp"
         android:layout_alignBottom="@+id/textView16"
-        android:layout_marginStart="55dp"
+        android:layout_marginStart="50dp"
         android:layout_marginBottom="15dp"
         android:layout_toEndOf="@+id/textView16"
         android:background="#C3807878" />
@@ -116,5 +116,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
-
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="28dp"
+        android:layout_height="26dp"
+        android:layout_alignBottom="@+id/listview"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="163dp"
+        android:layout_marginBottom="-25dp"
+        android:background="@drawable/note"
+        android:fontFamily="@font/rubik_medium"
+        android:gravity="center|top"
+        android:text="2"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:translationZ="20dp"
+        android:visibility="gone" />
 </RelativeLayout>

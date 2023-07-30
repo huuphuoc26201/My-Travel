@@ -11,11 +11,26 @@ public class TourData {
     String imageUrl2;
     String about;
     String trip;
-    String MaTour;
+    String maTour;
     String schedule;
     String schedule1;
     public TourData() {
 
+    }
+
+    public TourData(String placeName, String money, String start, String time, String imageUrl, String imageUrl1, String imageUrl2, String about, String trip, String maTour, String schedule, String schedule1) {
+        this.placeName = placeName;
+        this.money = money;
+        this.start = start;
+        this.time = time;
+        this.imageUrl = imageUrl;
+        this.imageUrl1 = imageUrl1;
+        this.imageUrl2 = imageUrl2;
+        this.about = about;
+        this.trip = trip;
+        this.maTour = maTour;
+        this.schedule = schedule;
+        this.schedule1 = schedule1;
     }
 
     public String getPlaceName() {
@@ -91,11 +106,11 @@ public class TourData {
     }
 
     public String getMaTour() {
-        return MaTour;
+        return maTour;
     }
 
     public void setMaTour(String maTour) {
-        MaTour = maTour;
+        this.maTour = maTour;
     }
 
     public String getSchedule() {
@@ -111,21 +126,6 @@ public class TourData {
     }
 
     public void setSchedule1(String schedule1) {
-        this.schedule1 = schedule1;
-    }
-
-    public TourData(String placeName, String money, String start, String time, String imageUrl, String imageUrl1, String imageUrl2, String about, String trip, String maTour, String schedule, String schedule1) {
-        this.placeName = placeName;
-        this.money = money;
-        this.start = start;
-        this.time = time;
-        this.imageUrl = imageUrl;
-        this.imageUrl1 = imageUrl1;
-        this.imageUrl2 = imageUrl2;
-        this.about = about;
-        this.trip = trip;
-        MaTour = maTour;
-        this.schedule = schedule;
         this.schedule1 = schedule1;
     }
 }

@@ -20,20 +20,18 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.adapter.PhotoviewPagerAdapter;
 import com.example.adapter.TourPlacesAdapter;
 import com.example.adapter.ZoomOutPageTransformer;
-import com.example.adapter.gioHangAdapter;
-import com.example.adapter.historyAdapter;
 import com.example.adapter.homeHotelAdapter;
 import com.example.adapter.tourLikeAdapter;
 import com.example.adapter.whyAdapter;
 import com.example.model.Photo;
 import com.example.model.TourData;
-import com.example.model.gioHangData;
 import com.example.model.hoTelData;
-import com.example.model.orderDetailsData;
 import com.example.model.tourLikeData;
 import com.example.model.whydata;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,14 +53,9 @@ public class Home extends AppCompatActivity {
     ArrayList<hoTelData> hotelDataArrayList;
     private ImageView imageView;
     BottomNavigationView nav;
-    private DatabaseReference mDatabase;
     private TextView seeall;
-    private TextView search;
+    private TextView search,countCart;
     private Button hotel,maybay,amthuc;
-    gioHangAdapter giohangAdapter;
-    historyAdapter historyadapter;
-    public static ArrayList<gioHangData> manggiohang;
-    public static ArrayList<orderDetailsData> manggiooder;
 
     private ViewPager2 mViewPager2;
     private CircleIndicator3 mCircleIndicator3;
@@ -91,11 +84,13 @@ public class Home extends AppCompatActivity {
         mCircleIndicator3=findViewById(R.id.circleIndicator);
         mListPhoto=getListPhoto();
         hotel=(Button) findViewById(R.id.hotel);
+        countCart=findViewById(R.id.count);
         maybay=(Button) findViewById(R.id.maybay);
         amthuc=(Button) findViewById(R.id.amthucviet);
         seeall=(TextView) findViewById(R.id.textView4);
         search=(TextView) findViewById(R.id.editText);
 
+        numberCart();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +98,7 @@ public class Home extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
         rcv_why=(RecyclerView) findViewById(R.id.rcv_why);
         whyadapter = new whyAdapter(this);
@@ -155,22 +151,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        if(manggiohang!=null){
 
-        }else {
-            manggiohang=new ArrayList<>();
-            manggiohang= (ArrayList<gioHangData>) giohangDatabase.getInstance(this).userDao().getListGiohang();
-            giohangAdapter=new gioHangAdapter(Home.this,manggiohang);
-            giohangAdapter.setData(manggiohang);
-        }
-        if(manggiooder!=null){
-
-        }else {
-            manggiooder=new ArrayList<>();
-            manggiooder= (ArrayList<orderDetailsData>) historyDatabase.getInstance(this).historyDao().getListHistory();
-            historyadapter=new historyAdapter(Home.this,manggiooder);
-            historyadapter.setData(manggiooder);
-        }
 
         PhotoviewPagerAdapter adapter=new PhotoviewPagerAdapter(mListPhoto);
         mViewPager2.setAdapter(adapter);
@@ -267,7 +248,7 @@ public class Home extends AppCompatActivity {
 
                     case R.id.booking:
                         Toast.makeText(Home.this,"Booking",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(),booking.class));
+                        startActivity(new Intent(getApplicationContext(),payTour.class));
                         overridePendingTransition(0,0);
                         return true;
 
@@ -290,6 +271,50 @@ public class Home extends AppCompatActivity {
         });
 
 
+    }
+
+    private void numberCart() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+        }
+        String eemail = user.getEmail();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tài Khoản");
+        ref.orderByChild("email").equalTo(eemail).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        com.example.model.user User = ds.getValue(com.example.model.user.class);
+                        if (User != null) {
+                            String key = User.getKey();
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("manyTour").child(key);
+                            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        countCart.setVisibility(View.VISIBLE);
+                                        int count = (int) dataSnapshot.getChildrenCount();
+                                        countCart.setText(String.valueOf(count));
+                                    }else{
+                                        countCart.setVisibility(View.GONE);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    // Xử lý khi có lỗi xảy ra
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Xảy ra lỗi trong quá trình đọc dữ liệu
+            }
+        });
     }
 
     private List<Photo> getListPhoto(){

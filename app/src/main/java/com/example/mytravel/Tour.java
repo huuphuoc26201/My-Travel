@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,8 @@ import com.example.model.Catogory;
 import com.example.model.TourData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +43,7 @@ public class Tour extends AppCompatActivity {
     ArrayList<TourData> tourDataArrayList;
     private Spinner spnCatogory;
     private CatogoryAdapter catogoryAdapter;
+    TextView countCart;
 
     BottomNavigationView nav;
 
@@ -55,6 +59,8 @@ public class Tour extends AppCompatActivity {
         spnCatogory=findViewById(R.id.spn_catogory);
         catogoryAdapter=new CatogoryAdapter(this,R.layout.item_select,getListCatelogy());
         spnCatogory.setAdapter(catogoryAdapter);
+        countCart=findViewById(R.id.count);
+        numberCart();
         DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Tours");
         spnCatogory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -107,13 +113,6 @@ public class Tour extends AppCompatActivity {
 
             }
         });
-        searchText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String msearchText=searchText.getText().toString().trim();
-                SearchView(msearchText);
-            }
-        });
         searchview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +145,7 @@ public class Tour extends AppCompatActivity {
 
                     case R.id.booking:
                         Toast.makeText(Tour.this, "Booking", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), booking.class));
+                        startActivity(new Intent(getApplicationContext(), payTour.class));
                         overridePendingTransition(0, 0);
                         return true;
 
@@ -172,38 +171,47 @@ public class Tour extends AppCompatActivity {
     }
 
     private void SearchView(String msearchText) {
-        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Tours");
-        //Query firebasesearch=databaseReference.orderByChild("placeName").startAt(msearchText).endAt(msearchText+"\uf8ff");
-        if(msearchText!=null){
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    clearAll();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Tours");
 
-                    for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        TourData tourData=snapshot.getValue(TourData.class);
-                        if(tourData.getPlaceName().toLowerCase().contains(msearchText.toLowerCase())||tourData.getMaTour().toLowerCase().contains(msearchText.toLowerCase()))
-                            tourDataArrayList.add(tourData);
-                    }
-                    tourAdapter=new TourAdapter(getApplicationContext(),tourDataArrayList);
-                    recyclerView.setAdapter(tourAdapter);
-                    tourAdapter.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(Tour.this,"Error"+error.getMessage(),Toast.LENGTH_LONG).show();
-
-                }
-            });
-        }else {
+        if (msearchText != null && !msearchText.isEmpty()) {
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     clearAll();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         TourData tourData = snapshot.getValue(TourData.class);
-                        tourDataArrayList.add(tourData);
+                        if (tourData != null) {
+                            String placeName = tourData.getPlaceName();
+                            String maTour = tourData.getMaTour();
+
+                            if ((placeName != null && placeName.toLowerCase().contains(msearchText.toLowerCase()))
+                                    || (maTour != null && maTour.toLowerCase().contains(msearchText.toLowerCase()))) {
+                                tourDataArrayList.add(tourData);
+                            }
+                        }
+                    }
+
+                    tourAdapter = new TourAdapter(getApplicationContext(), tourDataArrayList);
+                    recyclerView.setAdapter(tourAdapter);
+                    tourAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(Tour.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            // If no search text is provided, show all tours
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    clearAll();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        TourData tourData = snapshot.getValue(TourData.class);
+                        if (tourData != null) {
+                            tourDataArrayList.add(tourData);
+                        }
                     }
                     tourAdapter = new TourAdapter(getApplicationContext(), tourDataArrayList);
                     recyclerView.setAdapter(tourAdapter);
@@ -212,11 +220,10 @@ public class Tour extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(Tour.this, "Error" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(Tour.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         }
-
     }
 
     private void clearAll() {
@@ -249,5 +256,49 @@ public class Tour extends AppCompatActivity {
         list.add(new Catogory("Cần Thơ"));
         list.add(new Catogory("Đà Lạt"));
         return list;
+    }
+
+    private void numberCart() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+        }
+        String eemail = user.getEmail();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tài Khoản");
+        ref.orderByChild("email").equalTo(eemail).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        com.example.model.user User = ds.getValue(com.example.model.user.class);
+                        if (User != null) {
+                            String key = User.getKey();
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("manyTour").child(key);
+                            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        countCart.setVisibility(View.VISIBLE);
+                                        int count = (int) dataSnapshot.getChildrenCount();
+                                        countCart.setText(String.valueOf(count));
+                                    }else{
+                                        countCart.setVisibility(View.GONE);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    // Xử lý khi có lỗi xảy ra
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Xảy ra lỗi trong quá trình đọc dữ liệu
+            }
+        });
     }
 }

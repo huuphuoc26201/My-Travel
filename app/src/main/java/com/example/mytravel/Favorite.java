@@ -42,8 +42,8 @@ public class Favorite extends AppCompatActivity {
         btnTour=findViewById(R.id.btntour);
         recyclerView=findViewById(R.id.recyclerviewHotel);
         recyclerViewTour=findViewById(R.id.recyclerviewTour);
-        recyclerViewTour.setVisibility(View.INVISIBLE);
-        recyclerView.setVisibility(View.VISIBLE);
+        recyclerViewTour.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(hotelAdapter);
@@ -74,7 +74,6 @@ public class Favorite extends AppCompatActivity {
                         if (User != null) {
                             String key = User.getKey();
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Favorite").child(key).child("Tour");
-                            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Tours");
                             myRef.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

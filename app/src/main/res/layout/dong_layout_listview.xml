@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Nội dung"
+        android:fontFamily="serif"
         android:textColor="#B5000000"
         android:textSize="18dp"
         android:textStyle="bold"

@@ -1,7 +1,10 @@
 package com.example.mytravel;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,6 +56,7 @@ public class Hotel extends AppCompatActivity {
         catogoryAdapter=new CatogoryAdapter(this,R.layout.item_select,getListCatelogy());
         spnCatogory.setAdapter(catogoryAdapter);
 
+        location();
         spnCatogory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -119,6 +125,26 @@ public class Hotel extends AppCompatActivity {
 
 
     }
+
+    private void location() {
+        String vitri=getIntent().getStringExtra("location");
+        if(vitri!=null){
+            Uri intentUri = Uri.parse("geo:0,0?q=" + Uri.encode(vitri));
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, intentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            if (ContextCompat.checkSelfPermission(Hotel.this,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions((Activity) Hotel.this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
+                return;
+            }
+            mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Hotel.this.startActivity(mapIntent);
+        }
+    }
+
     private void allhotel(){
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

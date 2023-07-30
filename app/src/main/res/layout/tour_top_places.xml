@@ -17,6 +17,7 @@
         android:layout_alignParentBottom="true"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +42,9 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:text="Bãi  biển Phú Quốc"
+            android:fontFamily="serif"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="19dp"
             android:textStyle="bold" />
 
         <LinearLayout

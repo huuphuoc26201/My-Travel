@@ -65,8 +65,7 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/view5" />
 
 
     <EditText
@@ -122,9 +121,9 @@
         android:id="@+id/google_img"
         android:layout_width="0dp"
         android:layout_height="47dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginEnd="76dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginEnd="74dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +132,7 @@
         <ImageView
             android:layout_width="4dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="3.2"
             android:background="@color/white"
             android:contentDescription="@string/google_icon"
             app:srcCompat="@drawable/google" />
@@ -226,27 +225,36 @@
         />
 
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
-        android:layout_width="254dp"
-        android:layout_height="56dp"
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="54dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="@+id/google_img"
-        app:layout_constraintStart_toStartOf="@+id/google_img"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="TouchTargetSizeCheck" />
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#D30355FB"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="240dp"
+            android:layout_marginLeft="3dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            tools:ignore="TouchTargetSizeCheck" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="25dp"
         android:layout_height="30dp"
+        android:gravity="center"
         android:text="OR"
         android:textSize="15dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="@+id/google_img"
         app:layout_constraintStart_toStartOf="@+id/google_img"
         app:layout_constraintTop_toBottomOf="@+id/google_img" />

@@ -171,6 +171,19 @@ public class Signup extends AppCompatActivity {
         }
     }
 
+    public String generateRandomString() {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder sb = new StringBuilder(10);
+        Random random = new Random();
+
+        for (int i = 0; i < 10; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            sb.append(randomChar);
+        }
+
+        return sb.toString();
+    }
     private void dangki() {
         String name=name1.getText().toString().trim();
         String email=email1.getText().toString().trim();
@@ -182,12 +195,9 @@ public class Signup extends AppCompatActivity {
 
         FirebaseDatabase database=FirebaseDatabase.getInstance();
         DatabaseReference myref=database.getReference("Tài Khoản");
-        String randomString = "";
-        Random rnd = new Random();
-        char c = (char) (rnd.nextInt(26) + 'a'); // Tạo ngẫu nhiên một chữ cái từ a đến z
-        int number = rnd.nextInt(100); // Tạo ngẫu nhiên một số từ 0 đến 99
-        randomString = String.format("%02d%c", number, c); // Định dạng chuỗi với phần số có 2 chữ số và phần chữ cái
-        String ename=name+randomString;
+        String randomString =generateRandomString();
+        String fullname=name.toLowerCase();
+        String ename=fullname.replace(" ", "")+randomString;
 
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -198,9 +208,7 @@ public class Signup extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
                                     user User=new user(email,phone,name," ",ename);
-                                    String ename = User.getKey(); // Lấy giá trị thuộc tính ename của đối tượng User
                                     myref.child(ename).setValue(User);
-
                                     Toast.makeText(Signup.this, "Tạo tài khoản thành công. Vui lòng xác minh email của bạn!", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(Signup.this,Login.class));
                                     progressDialog.cancel();

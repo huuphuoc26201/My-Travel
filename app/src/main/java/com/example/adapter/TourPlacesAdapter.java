@@ -67,6 +67,9 @@ public class TourPlacesAdapter extends RecyclerView.Adapter<TourPlacesAdapter.To
                 intent.putExtra("imageUrl2",data_position.getImageUrl2());
                 intent.putExtra("trip",data_position.getTrip());
                 intent.putExtra("maTour",data_position.getMaTour());
+                intent.putExtra("schedule",data_position.getSchedule());
+                intent.putExtra("schedule1",data_position.getSchedule1());
+                intent.putExtra("back","back");
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 

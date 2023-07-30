@@ -1,12 +1,8 @@
 package com.example.mytravel;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,16 +10,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.adapter.CustomAdapter;
 import com.example.adapter.XMLDOMParser;
 import com.example.model.Docbaodata;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -40,7 +45,7 @@ public class News extends AppCompatActivity {
     ListView listView;
     CustomAdapter customAdapter;
     ArrayList<Docbaodata> mangdocbao;
-
+    TextView countCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +54,8 @@ public class News extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.listview);
         nav.setSelectedItemId(R.id.news);
         mangdocbao =new ArrayList<Docbaodata>();
-
+        countCart=findViewById(R.id.count);
+        numberCart();
 
 
         //menu
@@ -73,7 +79,7 @@ public class News extends AppCompatActivity {
 
                     case R.id.booking:
                         Toast.makeText(News.this,"Booking",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), booking.class));
+                        startActivity(new Intent(getApplicationContext(), payTour.class));
                         overridePendingTransition(0, 0);
                         return true;
 
@@ -174,6 +180,48 @@ public class News extends AppCompatActivity {
         }
         return content.toString();
     }
+    private void numberCart() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+        }
+        String eemail = user.getEmail();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tài Khoản");
+        ref.orderByChild("email").equalTo(eemail).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        com.example.model.user User = ds.getValue(com.example.model.user.class);
+                        if (User != null) {
+                            String key = User.getKey();
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("manyTour").child(key);
+                            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        countCart.setVisibility(View.VISIBLE);
+                                        int count = (int) dataSnapshot.getChildrenCount();
+                                        countCart.setText(String.valueOf(count));
+                                    }else{
+                                        countCart.setVisibility(View.GONE);
+                                    }
+                                }
 
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    // Xử lý khi có lỗi xảy ra
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Xảy ra lỗi trong quá trình đọc dữ liệu
+            }
+        });
+    }
 
 }

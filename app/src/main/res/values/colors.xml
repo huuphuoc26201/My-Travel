@@ -11,4 +11,5 @@
     <color name="colorPrimaryDark">#0099ff</color>
     <color name="colorAccent">#D81B60</color>
     <color name="yelow">#F5E906</color>
+    <color name="red">#F50606</color>
 </resources>

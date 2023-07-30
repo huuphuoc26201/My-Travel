@@ -64,14 +64,12 @@
 
             <ImageView
                 android:id="@+id/imageView14"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignStart="@+id/editText"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
                 android:layout_alignTop="@+id/editText"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="335dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="18dp"
                 android:layout_marginBottom="37dp"
                 app:srcCompat="@drawable/ic_search_black_24dp" />
 
@@ -106,8 +104,8 @@
         android:id="@+id/view7"
         android:layout_width="2.2dp"
         android:layout_height="48dp"
-        android:layout_marginTop="58dp"
-        android:layout_marginStart="340dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="335dp"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout"
@@ -126,5 +124,22 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerview"
         app:layout_constraintVertical_bias="0.973"
         app:menu="@menu/bottom_nav_menu" />
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="28dp"
+        android:layout_height="26dp"
+        android:layout_alignBottom="@+id/recyclerview"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="163dp"
+        android:layout_marginBottom="-25dp"
+        android:background="@drawable/note"
+        android:fontFamily="@font/rubik_medium"
+        android:gravity="center|top"
+        android:text="2"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:translationZ="20dp"
+        android:visibility="gone" />
 
 </RelativeLayout>

@@ -201,6 +201,10 @@ public class Login extends AppCompatActivity {
                                                     // Email has already been used to create an account
                                                     Toast.makeText(getApplicationContext(),"Email đã được sử dụng để đăng kí tài khoản trên hệ thống!",Toast.LENGTH_SHORT).show();
                                                 } else {
+                                                    Toast.makeText(getApplicationContext(),"Đăng nhập bằng tài khoản Google thành công",Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(Login.this, Home.class);
+                                                    startActivity(intent);
+                                                    finish();
                                                     // Email has not been used before, login successful
                                                     FirebaseAuth auth = FirebaseAuth.getInstance();
                                                     FirebaseUser user1 = auth.getCurrentUser();
@@ -224,7 +228,7 @@ public class Login extends AppCompatActivity {
                                                             if (dataSnapshot.exists()) {
                                                             }else{
                                                                 // Tạo một đối tượng User với các thuộc tính cần lưu trữ
-                                                                com.example.model.user currentUser = new user(email," ", name, photoUrl.toString(),uid);
+                                                                com.example.model.user currentUser = new user(email,"", name, photoUrl.toString(),uid);
                                                                 // Đưa đối tượng User lên Realtime Database
                                                                 ref.setValue(currentUser);
                                                             }
@@ -234,9 +238,7 @@ public class Login extends AppCompatActivity {
                                                             // Xảy ra lỗi trong quá trình đọc dữ liệu
                                                         }
                                                     });
-                                                    Toast.makeText(getApplicationContext(),"Đăng nhập bằng tài khoản Google thành công",Toast.LENGTH_SHORT).show();
-                                                    Intent intent=new Intent(getApplicationContext(),Home.class);
-                                                    startActivity(intent);
+
                                                 }
                                             } else {
                                                 // An error occurred while checking if email has been used

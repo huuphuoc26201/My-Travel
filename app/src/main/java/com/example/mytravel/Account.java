@@ -26,6 +26,10 @@ import androidx.core.content.ContextCompat;
 import com.bumptech.glide.Glide;
 import com.example.model.user;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +39,8 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,13 +60,17 @@ public class Account extends AppCompatActivity {
     private LinearLayout out,intro,evaluate,call,bia,feedback,changepassword,history;
     private TextView phone,tv_name,tv_email;
     private ImageView imgavt,edit;
-    public EditText edtname;
-    TextView editemail;
+    public EditText edtname,edtphone;
+    TextView editemail,countCart;;
     String path;
     Uri uri;
     int SELECT_IMAGE_CODE=1;
+    private GoogleSignInAccount mGoogleSignInAccount;
+
     private static final int REQUEST_CALL = 1;
     private static final int MY_REQQUEST_CODE=10;
+    private GoogleSignInClient mGoogleSignInClient;
+
     private FirebaseStorage storage;
     private StorageReference storageReference;
     private DatabaseReference mDatabase;
@@ -90,6 +100,8 @@ public class Account extends AppCompatActivity {
         storage = FirebaseStorage.getInstance();
         storageReference=storage.getReference();
         nav.setSelectedItemId(R.id.profile);
+        countCart=findViewById(R.id.count);
+        numberCart();
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,12 +124,29 @@ public class Account extends AppCompatActivity {
                 builderD.setPositiveButton("Lưu", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        editprofile();
-
+                        if(!validatePhone()){
+                        }else{
+                            editprofile();
+                        }
+                    }
+                    private boolean validatePhone() {
+                        String val = edtphone.getText().toString();
+                        String sdt = "[0-9]{10,11}";
+                        if (val.isEmpty()) {
+                            edtphone.setError("SĐT không được để trống");
+                            return false;
+                        } else if (!val.matches(sdt)) {
+                            edtphone.setError("Số điện thoại phải có 10 đến 11 chữ số");
+                            return false;
+                        } else {
+                            edtphone.setError(null);
+                            return true;
+                        }
                     }
                 });//Get text from edit text in dialog into display textview
                 edtname = view.findViewById(R.id.editname);
                 editemail=view.findViewById(R.id.edtemail);
+                edtphone=view.findViewById(R.id.edtphone);
                 FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
                 if(user==null){
                     return;
@@ -133,8 +162,10 @@ public class Account extends AppCompatActivity {
                                 if (User != null) {
                                     String name = User.getName();
                                     String email = User.getEmail();
+                                    String phone = User.getPhone();
                                     editemail.setText(email);
                                     edtname.setText(name);
+                                    edtphone.setText(phone);
                                 }
                             }
                         }
@@ -151,6 +182,8 @@ public class Account extends AppCompatActivity {
 
 
         });
+
+
         imgavt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -240,14 +273,30 @@ public class Account extends AppCompatActivity {
             }
 
             private void logOut() {
-                LoginManager.getInstance().logOut();
-                FirebaseAuth.getInstance().signOut();
+
                 AlertDialog.Builder ok = new AlertDialog.Builder(Account.this);
                 ok.setTitle("Đăng xuất");
                 ok.setMessage("Bạn có chắc chắn muốn đăng xuất?");
                 ok.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
+                        if (users == null) {
+                            return;
+                        }
+
+                        // Check if the user is using a Google account
+                        for (UserInfo userInfo : users.getProviderData()) {
+                            if (userInfo.getProviderId().equals(GoogleAuthProvider.PROVIDER_ID)) {
+                                signOut();
+                                LoginManager.getInstance().logOut();
+                                FirebaseAuth.getInstance().signOut();
+                                return;
+                            }
+                        }
+                        LoginManager.getInstance().logOut();
+                        FirebaseAuth.getInstance().signOut();
                         Intent intent = new Intent(Account.this, Login.class);
                         startActivity(intent);
                         finish();
@@ -281,10 +330,9 @@ public class Account extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
 
-
                     case R.id.booking:
                         Toast.makeText(Account.this,"Booking",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), booking.class));
+                        startActivity(new Intent(getApplicationContext(), payTour.class));
                         overridePendingTransition(0, 0);
                         return true;
 
@@ -305,8 +353,28 @@ public class Account extends AppCompatActivity {
         });
 
     }
+
+    private void signOut() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Intent intent = new Intent(Account.this, Login.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+    }
+
     private void editprofile() {
         String sfullName  = edtname.getText().toString();
+        String sphone  = edtphone.getText().toString();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
             return;
@@ -324,6 +392,7 @@ public class Account extends AppCompatActivity {
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Tài Khoản").child(key);
                             myRef.child("name").setValue(sfullName);
                             tv_name.setText(sfullName);
+                            myRef.child("phone").setValue(sphone);
                         }
                     }
                 }
@@ -472,5 +541,49 @@ public class Account extends AppCompatActivity {
     public void favorite(View view){
         Intent intent=new Intent(Account.this,Favorite.class);
         startActivity(intent);
+    }
+
+    private void numberCart() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            return;
+        }
+        String eemail = user.getEmail();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tài Khoản");
+        ref.orderByChild("email").equalTo(eemail).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        com.example.model.user User = ds.getValue(com.example.model.user.class);
+                        if (User != null) {
+                            String key = User.getKey();
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("manyTour").child(key);
+                            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        countCart.setVisibility(View.VISIBLE);
+                                        int count = (int) dataSnapshot.getChildrenCount();
+                                        countCart.setText(String.valueOf(count));
+                                    }else{
+                                        countCart.setVisibility(View.GONE);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    // Xử lý khi có lỗi xảy ra
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Xảy ra lỗi trong quá trình đọc dữ liệu
+            }
+        });
     }
 }

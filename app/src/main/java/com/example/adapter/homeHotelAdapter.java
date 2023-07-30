@@ -74,6 +74,7 @@ public class homeHotelAdapter extends RecyclerView.Adapter<homeHotelAdapter.Hote
                 intent.putExtra("gia",data_position.getGia());
                 intent.putExtra("danhgia",data_position.getDanhgia());
                 intent.putExtra("about",data_position.getAbout());
+                intent.putExtra("back","back");
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 

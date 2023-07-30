@@ -15,6 +15,7 @@
         android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold"
+        android:fontFamily="serif"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +31,7 @@
         android:inputType="textPersonName"
         android:padding="17dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColorHint="#B4000000"
         app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -40,11 +41,39 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Email:"
+        android:fontFamily="serif"
         android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/edtphone"
+        app:layout_constraintTop_toBottomOf="@+id/edtphone" />
+    <TextView
+        android:id="@+id/mobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Mobile:"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:fontFamily="serif"
         app:layout_constraintStart_toStartOf="@+id/editname"
         app:layout_constraintTop_toBottomOf="@+id/editname" />
+    <EditText
+        android:id="@+id/edtphone"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_border1"
+        android:drawableLeft="@drawable/ic_baseline_person"
+        android:drawablePadding="15dp"
+        android:hint="Phone"
+        android:inputType="phone"
+        android:padding="17dp"
+        android:textColor="@color/black"
+        android:textColorHint="#AE000000"
+        app:layout_constraintStart_toStartOf="@+id/mobile"
+        app:layout_constraintTop_toBottomOf="@+id/mobile" />
 
     <TextView
         android:id="@+id/edtemail"
@@ -59,7 +88,7 @@
         android:inputType="textEmailAddress"
         android:padding="17dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColorHint="#AD000000"
         app:layout_constraintStart_toStartOf="@+id/mail"
         app:layout_constraintTop_toBottomOf="@+id/mail" />
 

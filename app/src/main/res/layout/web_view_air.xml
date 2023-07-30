@@ -12,7 +12,7 @@
       android:layout_height="55dp"
       android:layout_alignParentStart="true"
       android:layout_alignParentEnd="true"
-      android:background="#30B1A7A7"
+      android:background="@drawable/home_bg"
       android:orientation="horizontal"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -20,11 +20,10 @@
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="45dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
@@ -41,7 +40,7 @@
         android:layout_marginBottom="0dp"
         android:gravity="center_vertical"
         android:text="             My Travel"
-        android:textColor="#03A9F4"
+        android:textColor="@color/white"
         android:textSize="27dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

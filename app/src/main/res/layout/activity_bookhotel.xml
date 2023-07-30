@@ -185,16 +185,34 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
             <TextView
+                android:id="@+id/money"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="18dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="1,900,000 VNĐ / đêm"
+                android:textColor="#C81212"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imageView8"
+                app:layout_constraintTop_toBottomOf="@+id/place_name" />
+
+            <TextView
                 android:id="@+id/textView53"
                 android:layout_width="345dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="Thủ Đức, Hồ Chí Minh"
                 android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/place_name" />
+                app:layout_constraintTop_toBottomOf="@+id/money" />
 
             <TextView
                 android:id="@+id/vitri"
@@ -311,12 +329,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:background="#EDFF5722"
-        android:drawableLeft="@drawable/ic_baseline_local_phone_24"
         android:gravity="center"
         android:onClick="booking"
         android:padding="15dp"
-        android:layout_marginBottom="15dp"
         android:text="Book Now"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
@@ -334,10 +351,13 @@
         android:layout_marginEnd="20dp"
         android:background="#45CFCAC9"
         android:gravity="center"
-        android:text="325.000 VNĐ"
+        android:padding="15dp"
+        android:text="LIÊN HỆ"
+        android:drawableLeft="@drawable/ic_baseline_local_phone_24"
         android:layout_marginBottom="15dp"
         android:textColor="#050505"
         android:textSize="16dp"
+        android:onClick="book"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnbook"
